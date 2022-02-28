@@ -17,25 +17,28 @@ export default function Banner() {
             game!
           </div>
           <div className="flex justify-between gap-5">
-            <button className=" flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm transition ease-in duration-100 uppercase w-full font-semibold primary__button">
-              <a
+            
+
+            <a
                 href="https://nemesisdownfall.com/whitepaper/"
                 target="_blank"
                 rel="noreferrer"
+                className=" flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm transition ease-in duration-100 uppercase w-full font-semibold primary__button"
+                style={{textAlign:"center"}}
               >
                 <div className="w-full"> Whitepaper</div>
-              </a>
-            </button>
+            </a>
 
-            <button className=" flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm transition ease-in duration-100 uppercase w-full font-semibold secondary__button">
-              <a
+            <a
                 href="https://nemesisdownfall.com/pitchdeck/"
                 target="_blank"
                 rel="noreferrer"
+                className=" flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm transition ease-in duration-100 uppercase w-full font-semibold secondary__button"
+                style={{textAlign:"center"}}
               >
                 <div className="w-full"> Pitch Deck</div>
-              </a>
-            </button>
+            </a>
+
           </div>
         </div>
         <div className=" flex justify-center">

@@ -37,10 +37,25 @@
   }
 }
 
-.navbar{
+.navbar {
   background-color: transparent;
 }
 
-.navbar.colorChange{
+.navbar.colorChange {
   background-color: #000;
+}
+
+.primary__button {
+  background-color: #ce5316;
+}
+
+.primary__button:hover {
+  background-color: #d69637;
+}
+
+.secondary__button {
+  background-color: #d69637;
+}
+.secondary__button:hover {
+  background-color: #ce5316;
 }

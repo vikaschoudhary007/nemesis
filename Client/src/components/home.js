@@ -331,7 +331,7 @@ export default function Home() {
                 size="small"
               />
               <span>
-                Have you transferred Doge2.0 from a centralized exchange ?
+                Have you transferred Doge2 from a centralized exchange ?
               </span>
             </label>
           </div>
