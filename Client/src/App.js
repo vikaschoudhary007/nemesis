@@ -32,9 +32,9 @@ function App() {
   const [navBackground, setNavBackground] = useState("appBarTransparent");
   const [colorChange, setColorchange] = useState(false);
   const [open, setOpen] = useState(false);
-  const [isChecked1, setIsChecked1] = useState(true);
-  const [isChecked2, setIsChecked2] = useState(true);
-  const [isChecked3, setIsChecked3] = useState(true);
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isChecked3, setIsChecked3] = useState(false);
   const [isChecked4, setIsChecked4] = useState(false);
   const [isChecked5, setIsChecked5] = useState(false);
   const [email, setEmail] = useState("");
@@ -90,6 +90,9 @@ function App() {
   const handleClose = () => {
     setOpen(false);
     setEmail("");
+    setIsChecked1(false);
+    setIsChecked2(false);
+    setIsChecked3(false);
     setIsChecked4(false);
     setIsChecked5(false);
   };
