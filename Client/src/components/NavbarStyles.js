@@ -38,6 +38,9 @@ export const NavLogo = styled.a`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+  @media screen and (max-width: 768px) {
+    margin-left: 0px;
+  }
 `;
 
 export const MobileIcon = styled.div`
@@ -59,10 +62,12 @@ export const NavMenu = styled.div`
   align-items: center;
   list-style: none;
   text-align: center;
-  margin-right: -22px;
+  margin-right: -35px;
 
-  @media screen and (max-width: 960px) {
+  ${
+    "" /* @media screen and (max-width: 960px) {
     display: none;
+  } */
   }
 `;
 

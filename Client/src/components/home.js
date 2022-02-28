@@ -1,6 +1,5 @@
 import React, { Fragment, useContext } from "react";
 // import Abi from "./contractAbi/bnbToShree.json";
-import { FaBars } from "react-icons/fa";
 import {
   Nav,
   NavContainer,
@@ -8,7 +7,6 @@ import {
   NavItem,
   NavLinks,
   NavMenu,
-  MobileIcon,
 } from "../components/NavbarStyles";
 
 import logo from "../assets/images/logo.png";
@@ -20,25 +18,25 @@ import { Modal, Box, Checkbox } from "@material-ui/core";
 import { UserContext } from "../contexts/UserContext";
 
 const style = {
-  list: "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
+  list: "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0  hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
   hoverList:
-    "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0 md:ml-4 text-gray-900 focus:text-gray-900 bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
+    "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0 text-gray-900 focus:text-gray-900 bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
   box: {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 600,
+    width: 420,
     bgcolor: "rgba(0,0,0,1)",
     border: "2px solid #000",
     borderRadius: "20px",
-    boxShadow: 24,
-    p: 4,
+    p: 2,
     color: "white",
+    boxShadow: "1px 1px 5px #888888",
   },
   email: {
     borderRadius: "10px",
-    width: "24vw",
+    width: "100%",
     borderStyle: "none ",
     outline: "none",
     padding: "4px",
@@ -94,6 +92,7 @@ export default function Home() {
     setEmail,
   } = useContext(UserContext);
 
+  console.log(formData.account);
   return (
     <>
       <div>
@@ -105,9 +104,9 @@ export default function Home() {
                   <img src={logo} alt="logo" className="h-12" />
                 </div>
               </NavLogo>
-              <MobileIcon>
-                <FaBars />
-              </MobileIcon>
+              {/* <MobileIcon>
+                <FaBars color="white" />
+              </MobileIcon> */}
               <NavMenu>
                 <NavItem>
                   {formData.walletConnected && (
@@ -121,9 +120,12 @@ export default function Home() {
                         marginTop: "24px",
                       }}
                     >
-                      {truncate(formData.account)}
+                      <span className="text-xs">
+                        {truncate(formData.account)}
+                      </span>
                       <span
-                        style={{ color: "red", paddingLeft: "20px" }}
+                        className="text-xs"
+                        style={{ color: "#ce5316", paddingLeft: "20px" }}
                       >{`${formData.balance} Doge2.0`}</span>
                     </NavLinks>
                   )}
@@ -134,10 +136,13 @@ export default function Home() {
                     {formData.walletConnected ? (
                       <div className="flex">
                         <button
-                          className=" flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
+                          className="flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
                           onClick={handleWalletDisconnect}
                         >
-                          Disconnect Wallet
+                          <span className="sm:block hidden">
+                            Disconnect Wallet
+                          </span>
+                          <span className="sm:hidden block">D</span>
                         </button>
                       </div>
                     ) : (
@@ -205,15 +210,19 @@ export default function Home() {
         aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={style.box}>
-          <h1> Claim {formData.balance} NEMESIS DOWNFALL tokens </h1>
-          <br />
+          <h1 className="text-xl">
+            {" "}
+            Claim {formData.balance} NEMESIS DOWNFALL tokens{" "}
+          </h1>
+          <hr className="mt-2 mb-3" />
+
           <div>
-            <label style={{ paddingLeft: "10px" }}>Email : </label>
+            <label>Email : </label>
             <input
               type="email"
               name="email"
               id="email"
-              className="form-control border-0"
+              className="form-control border-0 w-auto"
               style={style.email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -221,39 +230,41 @@ export default function Home() {
           </div>
           <div>
             <div>
-              <label>
+              <label className="text-xs">
                 <Checkbox
                   checked={isChecked4}
                   onChange={(e) => setIsChecked4(e.target.checked)}
-                  style={{ color: "red" }}
+                  style={{ color: "#ce5316" }}
                   size="small"
                 />
                 I agree for email conformation
               </label>
             </div>
 
-            <label>
+            <label className="text-xs">
               <Checkbox
                 checked={isChecked5}
                 onChange={(e) => setIsChecked5(e.target.checked)}
-                style={{ color: "red" }}
+                style={{ color: "#ce5316" }}
                 size="small"
               />
-              Have you transferred Doge2.0 from a centralized exchange ?
+              <span>
+                Have you transferred Doge2.0 from a centralized exchange ?
+              </span>
             </label>
           </div>
 
-          <div style={{ fontSize: "14px" }}>
+          <div className="text-sm">
             <div>
               <label>
                 <Checkbox
                   checked={isChecked1}
                   onChange={(e) => setIsChecked1(e.target.checked)}
-                  style={{ color: "yellow" }}
+                  style={{ color: "#d69637" }}
                   size="small"
                 />
                 Subscribe to our{" "}
-                <span style={{ color: "yellow" }}>
+                <span style={{ color: "#d69637" }}>
                   <a
                     href="https://t.me/NemesisDownfall"
                     target="_blank"
@@ -270,11 +281,11 @@ export default function Home() {
                 <Checkbox
                   checked={isChecked2}
                   onChange={(e) => setIsChecked2(e.target.checked)}
-                  style={{ color: "yellow" }}
+                  style={{ color: "#d69637" }}
                   size="small"
                 />
                 Subscribe to our{" "}
-                <span style={{ color: "yellow" }}>
+                <span style={{ color: "#d69637" }}>
                   <a
                     href="https://discord.com/invite/nemesisdownfall"
                     target="_blank"
@@ -291,11 +302,11 @@ export default function Home() {
                 <Checkbox
                   checked={isChecked3}
                   onChange={(e) => setIsChecked3(e.target.checked)}
-                  style={{ color: "yellow" }}
+                  style={{ color: "#d69637" }}
                   size="small"
                 />
                 Follow us on our{" "}
-                <span style={{ color: "yellow" }}>
+                <span style={{ color: "#d69637" }}>
                   <a
                     href="https://twitter.com/NemesisGame_"
                     target="_blank"
@@ -308,17 +319,19 @@ export default function Home() {
               </label>
             </div>
           </div>
-
-          <div style={{ display: "flex", gap: 12, justifyContent: "end" }}>
-            <button
-              className="text-white border-0 rounded-lg hover:bg-yellow-400 py-3 p-2 text-sm bg-red-600 uppercase font-semibold"
-              onClick={handleAddAccount}
-            >
-              Claim
-            </button>
+          <hr className="my-3" />
+          <div className="flex mt-2 gap-4 justify-end">
+            <div>
+              <button
+                className="text-white border-0 rounded-lg py-3 w-40 text-sm primary__button uppercase font-semibold"
+                onClick={handleAddAccount}
+              >
+                Claim
+              </button>
+            </div>
             <div className="">
               <button
-                className="text-white border-0 rounded-lg hover:bg-red-600 py-3 p-2 text-sm bg-yellow-400 uppercase font-semibold"
+                className="text-white border-0 rounded-lg py-3 w-40 text-sm secondary__button uppercase font-semibold"
                 onClick={handleClose}
               >
                 Close
