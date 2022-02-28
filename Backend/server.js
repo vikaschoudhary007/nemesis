@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 5000;
 
 //middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin:"*",
+  methods:['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}))
 
 // connecting mongodb ******* change the mongodb connection ID in the .env file **********************
 mongoose.connect(process.env.MDB_CONNECT, 
