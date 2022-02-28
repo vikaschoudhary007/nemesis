@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 //middleware
 app.use(express.json())
 app.use(cors({
-  origin:"*",
+  origin:["http://presale.nemesisdownfall.com/", "http://admin.nemesisdownfall.com/"],
   methods:['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }))
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MDB_CONNECT,
 })
 
 // calling apis
-app.use("/", require("./routers/userRouter"));
+app.use("/api", require("./routers/userRouter"));
 
 app.listen(PORT, () => {
   console.log(`Server listening on PORT : ${PORT}`);
