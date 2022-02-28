@@ -64,10 +64,8 @@ export const NavMenu = styled.div`
   text-align: center;
   margin-right: -35px;
 
-  ${
-    "" /* @media screen and (max-width: 960px) {
+  @media screen and (max-width: 960px) {
     display: none;
-  } */
   }
 `;
 

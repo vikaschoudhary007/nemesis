@@ -7,26 +7,29 @@ import {
   NavItem,
   NavLinks,
   NavMenu,
+  MobileIcon,
 } from "../components/NavbarStyles";
-
+import { FaBars } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import Banner from "../pages/banner";
 import BG from "../assets/images/bg1.jpg";
 import Air from "../assets/images/air.png";
 import { makeStyles } from "@material-ui/core/styles";
-import { Modal, Box, Checkbox } from "@material-ui/core";
+import { Modal, Box, Checkbox, Menu, MenuItem } from "@material-ui/core";
 import { UserContext } from "../contexts/UserContext";
+// import Menu from "@mui/material/Menu";
+// import MenuItem from "@mui/material/MenuItem";
 
 const style = {
   list: "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0  hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
   hoverList:
-    "px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0 text-gray-900 focus:text-gray-900 bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
+    "px-2 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white text-gray-200 md:mt-0 text-gray-900 focus:text-gray-900 bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline",
   box: {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 420,
+    width: 390,
     bgcolor: "rgba(0,0,0,1)",
     border: "2px solid #000",
     borderRadius: "20px",
@@ -92,7 +95,14 @@ export default function Home() {
     setEmail,
   } = useContext(UserContext);
 
-  console.log(formData.account);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openMobileMenu = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <div>
@@ -104,10 +114,78 @@ export default function Home() {
                   <img src={logo} alt="logo" className="h-12" />
                 </div>
               </NavLogo>
-              {/* <MobileIcon>
+              {/* <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                Dashboard
+              </Button> */}
+              <MobileIcon
+                id="menu-button"
+                aria-controls={openMobileMenu ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openMobileMenu ? "true" : undefined}
+                onClick={handleMenuClick}
+              >
                 <FaBars color="white" />
-              </MobileIcon> */}
-              <NavMenu>
+              </MobileIcon>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={openMobileMenu}
+                onClose={handleMenuClose}
+                MenuListProps={{
+                  "aria-labelledby": "menu-button",
+                }}
+              >
+                {formData.walletConnected && (
+                  <>
+                    <MenuItem
+                      className={style.hoverList}
+                      href="#"
+                      style={{
+                        width: "180px",
+                        height: "35px",
+                        paddingTop: "8px",
+                        textAlign: "center",
+                      }}
+                    >
+                      <span className="text-md">
+                        {truncate(formData.account)}
+                      </span>
+                    </MenuItem>
+                    <MenuItem>
+                      <span
+                        className="text-md"
+                        style={{ color: "#ce5316", paddingLeft: "5px" }}
+                      >{`${formData.balance} Doge2.0`}</span>
+                    </MenuItem>
+                  </>
+                )}
+                <MenuItem>
+                  {formData.walletConnected ? (
+                    <div className="flex">
+                      <button
+                        className="flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
+                        onClick={handleWalletDisconnect}
+                      >
+                        <span>Disconnect Wallet</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className=" flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
+                      onClick={handleWalletConnect}
+                    >
+                      Connect Wallet
+                    </button>
+                  )}
+                </MenuItem>
+              </Menu>
+              <NavMenu className="">
                 <NavItem>
                   {formData.walletConnected && (
                     <NavLinks
@@ -120,18 +198,22 @@ export default function Home() {
                         marginTop: "24px",
                       }}
                     >
-                      <span className="text-xs">
+                      <span className="text-md">
                         {truncate(formData.account)}
                       </span>
                       <span
-                        className="text-xs"
-                        style={{ color: "#ce5316", paddingLeft: "20px" }}
+                        className="text-md"
+                        style={{ color: "#ce5316", paddingLeft: "5px" }}
                       >{`${formData.balance} Doge2.0`}</span>
                     </NavLinks>
                   )}
                   <NavLinks
-                    className="md:mt-0 md:ml-4"
-                    style={{ float: "left", marginTop: "24px" }}
+                    style={{
+                      float: "left",
+                      marginTop: "24px",
+                      marginRight: 0,
+                      marginLeft: 0,
+                    }}
                   >
                     {formData.walletConnected ? (
                       <div className="flex">
