@@ -99,9 +99,9 @@ export default function Home() {
       <div>
         <Fragment>
           <Nav className={colorChange ? "navbar colorChange" : "navbar"}>
-            <NavContainer>
+            <NavContainer className="container">
               <NavLogo href="#">
-                <div className="p-4">
+                <div className="py-4">
                   <img src={logo} alt="logo" className="h-12" />
                 </div>
               </NavLogo>
@@ -127,7 +127,6 @@ export default function Home() {
                       >{`${formData.balance} Doge2.0`}</span>
                     </NavLinks>
                   )}
-
                   <NavLinks
                     className="md:mt-0 md:ml-4"
                     style={{ float: "left", marginTop: "24px" }}
@@ -159,44 +158,46 @@ export default function Home() {
         <div className={classes.root}></div>
 
         <div
-          className="bg-gray-200 h-screen bg-center "
-          style={{ background: `url(${BG})`, backgroundSize: "cover" }}
+          className="bg-gray-200 bg-center bg-cover"
+          style={{ backgroundImage: `url(${BG})` }}
         >
           <Banner />
         </div>
 
-        <div className="contain mx-auto px-24 bg-black ">
-          <div className="flex flex-wrap justify-between gap-5 xl:px-24 lg:px-24 px-10 text-white">
-            <div className="text-center flex-1 rounded-lg overflow-hidden my-auto">
-              <div className="py-1 text-4xl font-black uppercase mb-5">
-                Airdrop
+        {/* AIRDROP SECTION */}
+        <div className="bg-black">
+          <div className="container mx-auto text-white">
+            <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1">
+              <div className="px-10 xl:py-44 lg:py-40 md:py-36 py-20">
+                <div className="text-center flex-1 rounded-lg overflow-hidden">
+                  <div className="py-1 text-4xl font-black uppercase mb-5">
+                    Airdrop
+                  </div>
+                  <div>
+                    <button
+                      className="flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm primary__button transition ease-in duration-100 uppercase w-4/5 font-semibold focus:outline-none"
+                      onClick={handleOpen}
+                    >
+                      Claim NEMESIS TOKENS
+                    </button>
+                  </div>
+                  <div className="py-2">
+                    Claim to get Nemesis Downfall Tokens. Claim NO LIMIT
+                  </div>
+                  <div className="font-bold">1 DOGE2.0 = 1 NEMESIS</div>
+                </div>
               </div>
-
-              <div>
-                <button
-                  className=" flex-1 text-white border-0 rounded-lg py-5 p-2 text-sm primary__button transition ease-in duration-100 uppercase w-4/5 font-semibold"
-                  onClick={handleOpen}
-                >
-                  Claim NEMESIS TOKENS
-                </button>
+              <div className="py-20">
+                <div className="my-auto" style={{ height: "400px" }}>
+                  <img src={Air} alt="airdrop" className="mx-auto h-full" />
+                </div>
               </div>
-              <div className="py-2">
-                Claim to get Nemesis Downfall Tokens. Claim NO LIMIT
-              </div>
-              <div className="font-bold pb-2">1 DOGE2.0 = 1 NEMESIS</div>
-            </div>
-            <div className="flex-1 py-16">
-              {" "}
-              <img
-                src={Air}
-                alt="airdrop"
-                style={{ height: "400px" }}
-                className="mx-auto"
-              />
             </div>
           </div>
         </div>
       </div>
+
+      {/* MODAL */}
       <Modal
         keepMounted
         open={open}
@@ -253,7 +254,11 @@ export default function Home() {
                 />
                 Subscribe to our{" "}
                 <span style={{ color: "yellow" }}>
-                  <a href="https://t.me/NemesisDownfall" target="_blank">
+                  <a
+                    href="https://t.me/NemesisDownfall"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     telegram
                   </a>
                 </span>{" "}
@@ -273,6 +278,7 @@ export default function Home() {
                   <a
                     href="https://discord.com/invite/nemesisdownfall"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     discord
                   </a>
@@ -290,7 +296,11 @@ export default function Home() {
                 />
                 Follow us on our{" "}
                 <span style={{ color: "yellow" }}>
-                  <a href="https://twitter.com/NemesisGame_" target="_blank">
+                  <a
+                    href="https://twitter.com/NemesisGame_"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     twitter
                   </a>
                 </span>{" "}
