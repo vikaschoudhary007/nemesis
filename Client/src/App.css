@@ -59,3 +59,18 @@
 .secondary__button:hover {
   background-color: #ce5316;
 }
+
+.wallet_button {
+  background-color: #000;
+  width: 100%;
+  padding: 1em;
+}
+
+.wallet_button:hover {
+  background-color: #282c34;
+}
+
+.connect_text {
+  color: #4c5e83;
+  font-size: xx-small;
+}

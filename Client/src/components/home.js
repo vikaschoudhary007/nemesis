@@ -14,8 +14,10 @@ import logo from "../assets/images/logo.png";
 import Banner from "../pages/banner";
 import BG from "../assets/images/bg1.jpg";
 import Air from "../assets/images/air.png";
+import WallletConnectLogo from "../assets/images/walletconnect.png"
+import MetaMaskLogo from "../assets/images/metamask.png"
 import { makeStyles } from "@material-ui/core/styles";
-import { Modal, Box, Checkbox, Menu, MenuItem } from "@material-ui/core";
+import { Modal, Box, Checkbox, Menu, MenuItem, Grid } from "@material-ui/core";
 import { UserContext } from "../contexts/UserContext";
 // import Menu from "@mui/material/Menu";
 // import MenuItem from "@mui/material/MenuItem";
@@ -74,6 +76,7 @@ export default function Home() {
   const {
     formData,
     open,
+    open2,
     isChecked1,
     isChecked2,
     isChecked3,
@@ -85,7 +88,7 @@ export default function Home() {
     setIsChecked3,
     setIsChecked4,
     setIsChecked5,
-    handleWalletConnect,
+    handleMetamaskConnect,
     handleWalletDisconnect,
     handleAddAccount,
     handleOpen,
@@ -93,6 +96,9 @@ export default function Home() {
     truncate,
     email,
     setEmail,
+    handleWalletOpen,
+    handleWalletClose,
+    handleSecondConnect
   } = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -161,7 +167,7 @@ export default function Home() {
                       <span
                         className="text-md"
                         style={{ color: "#ce5316", paddingLeft: "5px" }}
-                      >{`${formData.balance} Doge2.0`}</span>
+                      >{`${parseFloat(formData.balance).toFixed(2)} Doge2.0`}</span>
                     </MenuItem>
                   </>
                 )}
@@ -178,7 +184,7 @@ export default function Home() {
                   ) : (
                     <button
                       className=" flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
-                      onClick={handleWalletConnect}
+                      onClick={handleWalletOpen}
                     >
                       Connect Wallet
                     </button>
@@ -204,7 +210,7 @@ export default function Home() {
                       <span
                         className="text-md"
                         style={{ color: "#ce5316", paddingLeft: "5px" }}
-                      >{`${formData.balance} Doge2.0`}</span>
+                      >{`${parseFloat(formData.balance).toFixed(2)} Doge2.0`}</span>
                     </NavLinks>
                   )}
                   <NavLinks
@@ -230,7 +236,7 @@ export default function Home() {
                     ) : (
                       <button
                         className=" flex-1 text-white border-0 rounded-lg py-2 px-4 text-sm primary__button transition ease-in duration-100 font-semibold focus:outline-none"
-                        onClick={handleWalletConnect}
+                        onClick={handleWalletOpen}
                       >
                         Connect Wallet
                       </button>
@@ -420,6 +426,61 @@ export default function Home() {
               </button>
             </div>
           </div>
+        </Box>
+      </Modal>
+
+      {/* WALLET CONNECT MODAL */}
+      <Modal
+        open={open2}
+        onClose={handleWalletClose}
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
+      >
+        <Box sx={style.box}>
+          <h1 className="text-xl">
+            {" "}
+            Connect Wallet{" "}
+          </h1>
+          <hr className="mt-2 mb-3" />
+
+          <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <button
+                  className="text-white border-0 rounded-lg py-3 text-sm wallet_button uppercase font-semibold focus:outline-none"
+                  
+                  onClick={handleMetamaskConnect}
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                      <img src={MetaMaskLogo} alt="metamask" className="h-11"/>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <p>Metamask</p>
+                      <span className="connect_text">Connect to your MetaMask Wallet </span>
+                    </Grid>
+                  </Grid>
+                </button>
+              </Grid>
+
+              <Grid item xs={12}>
+                <button
+                  className="text-white border-0 rounded-lg py-3 w-40 text-sm wallet_button uppercase font-semibold focus:outline-none"
+                  
+                  onClick={handleSecondConnect}
+                >
+                  <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                      <img src={WallletConnectLogo} alt="walletconnect" className="h-11"/>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <p>WalletConnect</p>
+                      <span className="connect_text">Scan with WalletConnect to connect</span>
+                    </Grid>
+                  </Grid>
+                </button>
+              </Grid>
+            </Grid>
+      
         </Box>
       </Modal>
     </>

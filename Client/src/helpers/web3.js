@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import TokenABI from "../contractAbi/dogecoin.json";
 import * as c from "./const";
 
@@ -74,6 +75,7 @@ const loadBlockChainData = async (
 const listenAccountChange = async (formData, setFormData, setAccount) => {
   try {
     const web3 = window.web3;
+
     window.ethereum.on("accountsChanged", async () => {
       const accounts = await web3.eth.getAccounts();
       await setFormData({
@@ -82,6 +84,7 @@ const listenAccountChange = async (formData, setFormData, setAccount) => {
       });
       await setAccount(accounts[0]);
       localStorage.account = accounts[0] || "";
+      
     });
   } catch (err) {
     console.log(err);
@@ -104,9 +107,48 @@ const listenNetworkChange = async (formData, setFormData) => {
   });
 };
 
+////////////////////////////  HANDLE WALLET CONNECT EVENT //////////////////
+
+const walletConnectProvider = async (formData, setFormData, setAccount) => {
+  try{
+    const provider = new WalletConnectProvider({
+      rpc: {
+        56: "https://bsc-dataseed1.binance.org/",
+      },
+    });
+
+  
+    await provider.enable();
+
+    window.web3 = new Web3(provider)
+
+    provider.on("accountsChanged", async (accounts) => {
+      await setFormData({
+        ...formData,
+        account: accounts[0],
+      });
+      await setAccount(accounts[0]);
+      localStorage.account = accounts[0] || "";
+    });
+    
+    // Subscribe to chainId change
+    provider.on("chainChanged", async (chainId) => {
+      await setFormData({
+        ...formData,
+        netId: chainId,
+      });
+      localStorage.networkId = chainId;
+    });
+
+  }catch(err){
+    console.log(err)
+  }
+}
+
 export {
   loadWeb3,
   loadBlockChainData,
   listenAccountChange,
   listenNetworkChange,
+  walletConnectProvider
 };

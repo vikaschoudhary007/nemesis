@@ -10,10 +10,10 @@ export default function Banner() {
       <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 py-20">
         <div className=" px-10 xl:py-44 lg:py-40 md:py-36 py-28">
           <div className="xl:text-6xl lg:text-5xl md:text-4xl text-4xl font-black text-white mb-10">
-            Nemesis Downfall Pre-Sale Token Coming Soon!
+            Nemesis Downfall Token Pre-Sale Coming Soon!
           </div>
           <div className="font-light text-xl text-gray-200 mb-10">
-            Nemesis Downfall is a first-person play to earn crypto shooter video
+            Nemesis downfall is a first person shooter, play to earn shooter video
             game!
           </div>
           <div className="flex justify-between gap-5">

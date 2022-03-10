@@ -9,6 +9,7 @@ import {
   loadBlockChainData,
   listenAccountChange,
   listenNetworkChange,
+  walletConnectProvider
 } from "./helpers/web3";
 //Material
 import Home from "./components/home";
@@ -32,6 +33,7 @@ function App() {
   const [navBackground, setNavBackground] = useState("appBarTransparent");
   const [colorChange, setColorchange] = useState(false);
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
@@ -53,15 +55,6 @@ function App() {
   navRef.current = navBackground;
 
   useEffect(() => {
-    // const metaMaskInstalled = typeof window.web3 !== 'undefined';
-    // setMetaMaskInstalled(metaMaskInstalled);
-
-    // if(metaMaskInstalled){
-    //   loadWeb3()
-    //   loadBlockChainData(formData, setFormData, notifySuccess, setAccount)
-    //   listenAccountChange(formData, setFormData, setAccount)
-    //   listenNetworkChange(formData, setFormData)
-    // }
 
     const handleScroll = () => {
       const show = window.scrollY > 310;
@@ -97,6 +90,14 @@ function App() {
     setIsChecked5(false);
   };
 
+  const handleWalletOpen = () => {
+    setOpen2(true);
+  };
+
+  const handleWalletClose = () => {
+    setOpen2(false);
+  };
+
   const handleWalletDisconnect = () => {
     const obj = {
       web3: null,
@@ -110,22 +111,35 @@ function App() {
       balance: 0,
     };
     setFormData(obj);
+
+    localStorage.removeItem("walletconnect")
   };
 
-  const handleWalletConnect = async () => {
+  const handleMetamaskConnect = async () => {
     const metaMaskInstalled = typeof window.web3 !== "undefined";
     // setMetaMaskInstalled(metaMaskInstalled);
 
     if (metaMaskInstalled) {
-      loadWeb3();
-      loadBlockChainData(formData, setFormData, notifyError, setAccount);
-      listenAccountChange(formData, setFormData, setAccount);
-      listenNetworkChange(formData, setFormData);
+      await loadWeb3();
+      await loadBlockChainData(formData, setFormData, notifyError, setAccount);
+      await listenAccountChange(formData, setFormData, setAccount);
+      await listenNetworkChange(formData, setFormData);
+
+      handleWalletClose()
     } else {
       notifyError("Please install Metamask");
       // this.setState({ loaded: false, walletConnected: false });
     }
   };
+
+  const handleSecondConnect = async () => {
+    await walletConnectProvider(formData, setFormData, setAccount);
+    await loadBlockChainData(formData, setFormData, notifyError, setAccount);
+    await listenAccountChange(formData, setFormData, setAccount);
+    await listenNetworkChange(formData, setFormData);
+
+    handleWalletClose()
+  }
 
   const truncate = (str) => {
     return str.length > 10
@@ -219,6 +233,7 @@ function App() {
         value={{
           formData,
           open,
+          open2,
           email,
           isChecked1,
           isChecked2,
@@ -231,7 +246,7 @@ function App() {
           setIsChecked3,
           setIsChecked4,
           setIsChecked5,
-          handleWalletConnect,
+          handleMetamaskConnect,
           handleWalletDisconnect,
           handleAddAccount,
           handleOpen,
@@ -240,6 +255,9 @@ function App() {
           setEmail,
           notifySuccess,
           notifyError,
+          handleWalletOpen,
+          handleWalletClose,
+          handleSecondConnect
         }}
       >
         <BrowserRouter>
