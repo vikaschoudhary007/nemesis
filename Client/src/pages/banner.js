@@ -13,7 +13,7 @@ export default function Banner() {
             Nemesis Downfall Token Pre-Sale Coming Soon!
           </div>
           <div className="font-light text-xl text-gray-200 mb-10">
-            Nemesis downfall is a first person shooter, play to earn shooter video
+            Nemesis downfall is a first person shooter, play to earn video
             game!
           </div>
           <div className="flex justify-between gap-5">
