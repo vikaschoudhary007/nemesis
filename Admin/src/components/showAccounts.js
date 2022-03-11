@@ -229,7 +229,7 @@ export default function ShowAccounts() {
                       <span
                         className="text-md"
                         style={{ color: "#ce5316", paddingLeft: "5px" }}
-                      >{`${formData.balance} Doge2.0`}</span>
+                      >{`${parseFloat(formData.balance).toFixed(2)} Doge2.0`}</span>
                     </MenuItem>
                   </>
                 )}
